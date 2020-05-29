@@ -23,6 +23,8 @@ export class CustomMap {
     });
   }
 
+  
+
   addMarker(mappable: Mappable): void {
     const marker = new google.maps.Marker({
       map: this.googleMap,
@@ -34,7 +36,7 @@ export class CustomMap {
 
     marker.addListener("click", () => {
       const infoWindow = new google.maps.InfoWindow({
-        content: "Hi There!",
+        content: mappable.markerContent(),
       });
 
       infoWindow.open(this.googleMap, marker);

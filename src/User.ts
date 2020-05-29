@@ -17,6 +17,10 @@ export class User {
         }
     }
 
+    markerContent(): string {
+        return `userName: ${this.name}`
+    }
+
 }
 
 // note : whenever we use a JS package in ts project, there are higher chances that the package is not written in TS. Hence TS compiler will also find it difficult to work with such packages.

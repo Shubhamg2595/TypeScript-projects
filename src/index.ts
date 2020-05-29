@@ -11,5 +11,3 @@ myMap.addMarker(user);
 myMap.addMarker(company);
 
 
-// console.log("user -", user);
-// console.log("company -", company);
