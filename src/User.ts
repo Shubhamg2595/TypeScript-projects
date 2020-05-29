@@ -9,6 +9,14 @@ class User {
     }
 
 
+    constructor(){
+        this.name = faker.name.firstName();
+        this.location = {
+            lat: parseFloat(faker.address.latitude()) ,
+            lng: parseFloat(faker.address.longitude()),
+        }
+    }
+
 }
 
 // note : whenever we use a JS package in ts project, there are higher chances that the package is not written in TS. Hence TS compiler will also find it difficult to work with such packages.
