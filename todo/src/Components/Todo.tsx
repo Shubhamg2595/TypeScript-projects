@@ -8,8 +8,8 @@ type FormElem = React.FormEvent<HTMLFormElement>;
 // * with interfaces we can create new types and also perforn inheritance
 
 interface ITodo {
-  text: string;
-  complete: boolean;
+  task: string;
+  completed: boolean;
 }
 
 // inheritance with TS interfaces
@@ -24,8 +24,16 @@ export default function Todo() {
 
   function handleSubmit(e: FormElem) {
     e.preventDefault();
+    addTodo(value);
     setValue("");
   }
+
+  const addTodo = (task: string): void => {
+    const updatedTodos: ITodo[] = [...todos, { task, completed: false }];
+    setTodos(updatedTodos);
+  };
+
+  console.log('Todos',todos)
 
   return (
     <>
