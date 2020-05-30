@@ -1,5 +1,20 @@
 import React, { useContext, useEffect } from "react";
 import { Store } from "../Store/store";
+
+interface IEpisode {
+  airdate: string;
+  airstamp: string;
+  airtime: string;
+  id: number;
+  image: { medium: string; original: string };
+  name: string;
+  number: number;
+  runtime: number;
+  season: number;
+  summary: string;
+  url: string;
+}
+
 export default function Home(): JSX.Element {
   const { state, dispatch } = useContext(Store);
 
@@ -23,6 +38,22 @@ export default function Home(): JSX.Element {
     <div>
       {console.log(state)}
       <h2> Rick and Morty epsiode picker </h2>
+      <section>
+        {state.episodes.map((episode: IEpisode) => {
+          return (
+            <section key={episode.id}>
+              <img
+                src={episode.image ? episode.image.medium : ""}
+                alt={`Rick and Morty ${episode.name}`}
+              />
+              <div>{episode.name}</div>
+              <section>
+                Season: {episode.season} Number: {episode.number}
+              </section>
+            </section>
+          );
+        })}
+      </section>
     </div>
   );
 }
