@@ -57,7 +57,6 @@ export default function Todo() {
     setTodos(toBeUpdatedTodos);
   };
 
-  console.log("Todos", todos);
 
   return (
     <>
