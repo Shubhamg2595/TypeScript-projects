@@ -33,7 +33,7 @@ export default function Todo() {
     setTodos(updatedTodos);
   };
 
-  console.log('Todos',todos)
+  console.log("Todos", todos);
 
   return (
     <>
@@ -47,6 +47,13 @@ export default function Todo() {
         />
         <button type="submit">Add Todo </button>
       </form>
+      <section>
+        {todos &&
+          todos.length > 0 &&
+          todos.map((todo: ITodo, index: number) => {
+            return <div key={index}>{todo.task}</div>;
+          })}
+      </section>
     </>
   );
 }
