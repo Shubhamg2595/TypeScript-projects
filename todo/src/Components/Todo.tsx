@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 // ? difference between typs and interfaces
 
@@ -33,6 +33,13 @@ export default function Todo() {
     setTodos(updatedTodos);
   };
 
+  const completeTodo = (index: number) => {
+    const toBeUpdatedTodos: ITodo[] = [...todos];
+    toBeUpdatedTodos[index].completed = !toBeUpdatedTodos[index].completed;
+
+    setTodos(toBeUpdatedTodos);
+  };
+
   console.log("Todos", todos);
 
   return (
@@ -51,7 +58,17 @@ export default function Todo() {
         {todos &&
           todos.length > 0 &&
           todos.map((todo: ITodo, index: number) => {
-            return <div key={index}>{todo.task}</div>;
+            return (
+              <>
+                <Fragment key={index}>
+                  <div>
+                    {todo.task}
+                    <button onClick={() => completeTodo(index)}> {todo.completed ? <i>completed</i> : <p> Not completed </p>} </button>
+                  </div>
+                  
+                </Fragment>
+              </>
+            );
           })}
       </section>
     </>
