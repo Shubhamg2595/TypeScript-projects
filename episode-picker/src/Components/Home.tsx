@@ -6,7 +6,7 @@ export default function Home(): JSX.Element {
   return (
     <div>
       <h2> Rick and Morty epsiode picker </h2>
-      <h3> {store} </h3>
+      {console.log(store)}
     </div>
   );
 }
