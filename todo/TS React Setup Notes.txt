@@ -1,5 +1,0 @@
-1. install typescript and supported type-definitions file for the same
-
-- npm i typescript @types/node @types/react @types/react-dom
-
-2. 
