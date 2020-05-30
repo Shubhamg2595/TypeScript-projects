@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Store } from "../Store/store";
-
+import "./Home.css";
 interface IEpisode {
   airdate: string;
   airstamp: string;
@@ -36,12 +36,13 @@ export default function Home(): JSX.Element {
 
   return (
     <div>
-      {console.log(state)}
-      <h2> Rick and Morty epsiode picker </h2>
-      <section>
+      <header className="header">
+        <h2> Rick and Morty epsiode picker </h2>
+      </header>
+      <section className="episode-layout">
         {state.episodes.map((episode: IEpisode) => {
           return (
-            <section key={episode.id}>
+            <section key={episode.id} className="episode-box">
               <img
                 src={episode.image ? episode.image.medium : ""}
                 alt={`Rick and Morty ${episode.name}`}
