@@ -40,6 +40,23 @@ export default function Todo() {
     setTodos(toBeUpdatedTodos);
   };
 
+  const deleteTodo = (index: number) => {
+    let toBeUpdatedTodos: ITodo[] = [...todos];
+
+    // ? way to pop element from array using index
+    // using filter
+    // toBeUpdatedTodos = toBeUpdatedTodos.filter(
+    //   (todo: ITodo, idx: number) => idx !== index
+    // );
+
+    // using splice
+    toBeUpdatedTodos.splice(index,1)
+
+    
+
+    setTodos(toBeUpdatedTodos);
+  };
+
   console.log("Todos", todos);
 
   return (
@@ -61,11 +78,26 @@ export default function Todo() {
             return (
               <>
                 <Fragment key={index}>
-                  <div>
+                  <div
+                    style={{
+                      textDecoration: todo.completed ? "line-through" : "",
+                    }}
+                  >
                     {todo.task}
-                    <button onClick={() => completeTodo(index)}> {todo.completed ? <i>completed</i> : <p> Not completed </p>} </button>
+                    <button onClick={() => completeTodo(index)}>
+                      {" "}
+                      {todo.completed ? (
+                        <i>completed</i>
+                      ) : (
+                        <p> Not completed </p>
+                      )}{" "}
+                    </button>
+
+                    <button onClick={() => deleteTodo(index)}>
+                      {" "}
+                      Delete Todo
+                    </button>
                   </div>
-                  
                 </Fragment>
               </>
             );
