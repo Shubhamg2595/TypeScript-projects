@@ -22,11 +22,21 @@ export default function Home(): JSX.Element {
     });
   };
 
-  const toggleFavoriteEpisode = (episode: IEpisode): IAction =>
-    dispatch({
+  const toggleFavoriteEpisode = (episode: IEpisode): IAction => {
+    let dispatchObj = {
       type: "ADD_FAV",
       payload: episode,
-    });
+    };
+
+    const favEpisode = state.favourites.includes(episode) ? true : false;
+    if (favEpisode) {
+      dispatchObj = {
+        type: "REMOVE_FAV",
+        payload: episode,
+      };
+    }
+    return dispatch(dispatchObj);
+  };
 
   console.log(state.favourites);
 
@@ -48,12 +58,17 @@ export default function Home(): JSX.Element {
                 <div>
                   Season: {episode.season} Number: {episode.number}
                 </div>
+                {state.favourites && state.favourites.includes(episode)
+                  ? "True"
+                  : "false"}
                 <button
                   type="button"
                   onClick={() => toggleFavoriteEpisode(episode)}
                 >
                   {" "}
-                  Add to favourite{" "}
+                  {state.favourites && state.favourites.includes(episode)
+                    ? "Remove from favourite"
+                    : "Add to favourite"}{" "}
                 </button>
               </section>
             </section>

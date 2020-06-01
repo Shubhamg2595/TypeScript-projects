@@ -21,6 +21,13 @@ function reducer(state: IState = initialState, action: IAction): IState {
         ...state,
         favourites: [...state.favourites, action.payload],
       };
+    case "REMOVE_FAV":
+      return {
+        ...state,
+        favourites: state.favourites.filter(
+          (favEps) => favEps.id !== action.payload.id
+        ),
+      };
     default:
       return state;
   }
