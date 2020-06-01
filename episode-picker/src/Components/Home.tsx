@@ -3,11 +3,14 @@ import { Store } from "../Store/store";
 import { IAction, IEpisode } from "../Interfaces/iindex";
 import "./Home.css";
 
+const EpisodeList = React.lazy<any>(() => import("./EpisodeList"));
+
 export default function Home(): JSX.Element {
   const { state, dispatch } = useContext(Store);
 
   useEffect(() => {
     fetchDataAction();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchDataAction = async () => {
@@ -43,38 +46,18 @@ export default function Home(): JSX.Element {
   return (
     <div>
       <header className="header">
-        <h2> Rick and Morty epsiode picker </h2>
+        <div>
+          <h2> Rick and Morty epsiode picker </h2>
+        </div>
+        <div> Favourite(s) : {state.favourites.length}</div>
       </header>
-      <section className="episode-layout">
-        {state.episodes.map((episode: IEpisode) => {
-          return (
-            <section key={episode.id} className="episode-box">
-              <img
-                src={episode.image ? episode.image.medium : ""}
-                alt={`Rick and Morty ${episode.name}`}
-              />
-              <div>{episode.name}</div>
-              <section>
-                <div>
-                  Season: {episode.season} Number: {episode.number}
-                </div>
-                {state.favourites && state.favourites.includes(episode)
-                  ? "True"
-                  : "false"}
-                <button
-                  type="button"
-                  onClick={() => toggleFavoriteEpisode(episode)}
-                >
-                  {" "}
-                  {state.favourites && state.favourites.includes(episode)
-                    ? "Remove from favourite"
-                    : "Add to favourite"}{" "}
-                </button>
-              </section>
-            </section>
-          );
-        })}
-      </section>
+      <React.Suspense fallback={<div> loading..... </div>}>
+        <EpisodeList
+          episodes={state.episodes}
+          favourites={state.favourites}
+          toggleFavoriteEpisode={toggleFavoriteEpisode}
+        />
+      </React.Suspense>
     </div>
   );
 }
