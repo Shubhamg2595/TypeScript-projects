@@ -1,15 +1,6 @@
-import React, { useReducer } from "react";
-
+import React from "react";
+import { IState, IAction } from "../Interfaces/iindex";
 // using contextAPI via useContext hook and useReducer hook while following Redux principles.
-
-interface IState {
-  episodes: [];
-  favourites: [];
-}
-interface IAction {
-  type: string;
-  payload: any;
-}
 
 const initialState: IState = {
   episodes: [],
@@ -25,7 +16,11 @@ function reducer(state: IState = initialState, action: IAction): IState {
         ...state,
         episodes: action.payload,
       };
-
+    case "ADD_FAV":
+      return {
+        ...state,
+        favourites: [...state.favourites, action.payload],
+      };
     default:
       return state;
   }

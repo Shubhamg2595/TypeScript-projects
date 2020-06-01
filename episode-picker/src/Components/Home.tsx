@@ -1,19 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Store } from "../Store/store";
+import { IAction, IEpisode } from "../Interfaces/iindex";
 import "./Home.css";
-interface IEpisode {
-  airdate: string;
-  airstamp: string;
-  airtime: string;
-  id: number;
-  image: { medium: string; original: string };
-  name: string;
-  number: number;
-  runtime: number;
-  season: number;
-  summary: string;
-  url: string;
-}
 
 export default function Home(): JSX.Element {
   const { state, dispatch } = useContext(Store);
@@ -34,6 +22,14 @@ export default function Home(): JSX.Element {
     });
   };
 
+  const toggleFavoriteEpisode = (episode: IEpisode): IAction =>
+    dispatch({
+      type: "ADD_FAV",
+      payload: episode,
+    });
+
+  console.log(state.favourites);
+
   return (
     <div>
       <header className="header">
@@ -49,7 +45,16 @@ export default function Home(): JSX.Element {
               />
               <div>{episode.name}</div>
               <section>
-                Season: {episode.season} Number: {episode.number}
+                <div>
+                  Season: {episode.season} Number: {episode.number}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => toggleFavoriteEpisode(episode)}
+                >
+                  {" "}
+                  Add to favourite{" "}
+                </button>
               </section>
             </section>
           );
